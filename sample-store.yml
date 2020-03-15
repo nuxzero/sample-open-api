@@ -1,0 +1,361 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is a sample store server.
+  version: "1.0.0"
+  title: Sample Store
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: natthawut1991@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/nuxzero/sample-store/1.0.0
+tags:
+  - name: customer
+    description: Everything about customer
+  - name: products
+    description: Everything about Products in store
+  - name: cart
+    description: Choose products 
+  - name: checkout
+    description: Checkout all products in cart
+paths:
+  /customer:
+    get:
+      tags:
+        - customer
+      summary: Get customer information
+      description: Get customer information
+      operationId: getCustomer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                CustomerObject:
+                  $ref: '#/components/examples/CustomerObject'
+  /products:
+    get:
+      tags:
+        - products
+      summary: Get all products in the store
+      description: Return all products in the store
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+              examples:
+                ProductListObject:
+                  $ref: '#/components/examples/ProductListObject'
+        '400':
+          description: Invalid status value
+  /products/{productId}:
+    get:
+      tags:
+        - products
+      summary: Find product by ID
+      description: Returns a single product
+      operationId: getProductById
+      parameters:
+        - name: productId
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                ProductObject:
+                  $ref: '#/components/examples/ProductObject'
+        default:
+          description: Unexpected error
+  /cart:
+    get:
+      tags:
+        - cart
+      summary: Get cart 
+      description: Returns cart info
+      operationId: getCart
+      parameters:
+        - name: productId
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Return a cart info include list of products in cart, tax, shipping cost, subtotal, and total price
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                CartObject:
+                  $ref: '#/components/examples/CartObject'
+    post:
+      tags:
+        - cart
+      summary: Add product to cart
+      description: Add product to cart 
+      operationId: postCart
+      requestBody:
+        description: Add product and amount to cart
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequest'
+      responses:
+        '200':
+          description: Add product to cart successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                CartObject:
+                  $ref: '#/components/examples/CartObject'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                BadRequestErrorObject:
+                  $ref: '#/components/examples/BadRequestErrorObject'
+  /checkout:
+    post:
+      tags:
+        - checkout
+      summary: Checkout cart
+      description: Process payment 
+      operationId: postCheckout
+      requestBody:
+        description: Payment info for payment process
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+      responses:
+        '200':
+          description: Charge result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checkout'
+              examples:
+                CheckoutObject:
+                  $ref: '#/components/examples/CheckoutObject'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                BadRequestErrorObject:
+                  $ref: '#/components/examples/BadRequestErrorObject'
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id: 
+          type: string      
+          description: Customer ID
+        name:
+          type: string 
+          description: Customer name
+        email:
+          type: string
+          description: Customer email
+        shipping_address:
+          type: string
+          description: Customer shipping address
+        phone:
+          type: string
+          description: Phone number
+        profile_image: 
+          type: string
+          description: Profile image
+    Product:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: Product ID
+        name: 
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        price: 
+          type: number
+          description: Product price
+        currency: 
+          type: string
+          description: Currency
+        thumb_image: 
+          type: string
+          description: Product thumbnail image URL 
+        large_image: 
+          type: string
+          description: Product image URLe
+      example: 
+        $ref: '#/components/examples/ProductObject'
+    ProductList:
+      type: array
+      items: 
+        $ref: '#/components/schemas/Product'
+      example:
+        $ref: '#/components/examples/ProductListObject'
+    Cart:
+      type: object
+      properties:
+        products:
+          type: array
+          items: 
+            $ref: '#/components/schemas/Product'
+        total:
+          type: number
+          format: double
+        shipping:
+          type: number
+          format: double
+      example:
+          $ref: '#/components/examples/CartObject'
+    CartRequest:
+      type: object
+      properties:
+          productId:
+            type: string
+            description: Product ID
+          amount: 
+            type: integer
+            description: Amount of purchesed profuct
+    Checkout:
+      type: object
+      properties:
+        isSuccessful: 
+          type: boolean
+          description: Payment status 
+          example: true
+    CheckoutRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Payment token from payment service
+        amount: 
+          type: integer
+          format: int64
+          description: Charge amount
+        currency:
+          type: string
+          description: Currency
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message: 
+          type: string
+          description: Error message description
+  examples:
+    CustomerObject:
+      value:
+        id: cus_test_1234
+        name: John Doe
+        email: johndoe@mail.com
+        shipping_address: |
+          338 Trenton Rd. Fort Lauderdale, FL 33308
+        phone: 0395757439
+        profile_image: https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/f0/f027cd92a7197258be82a4bb53b83f2d0cf8812e.jpg
+    ProductObject:
+      value:
+        id: CD4366-100
+        name: Nike Air Force 1 React
+        description: |
+          Refresh your look and step into a new AF1 world with the Nike Air Force 1 React. It fuses modern design with iconic b-ball style for a big, bold look. The oversized Swoosh, large "AIR" on the midsole and new sole pattern let you express your modern world while Nike React technology adds exceptional underfoot comfort.
+          - Shown: White/University Red/Black
+          - Style: CD4366-100
+        price: 120.0
+        currency: usd
+        thumb_image: https://static.nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/i1-fe0b0aa8-5a11-4839-b1ae-28358239e214/air-force-1-react-mens-shoe-b7HKxL.jpg
+        large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-e17d75fb-c3e5-4ed4-8a18-16eeac824d73/air-force-1-react-mens-shoe-b7HKxL.jpg
+    ProductListObject:
+      value:
+        - id: CD4366-100
+          name: Nike Air Force 1 React
+          description: |
+            Refresh your look and step into a new AF1 world with the Nike Air Force 1 React. It fuses modern design with iconic b-ball style for a big, bold look. The oversized Swoosh, large "AIR" on the midsole and new sole pattern let you express your modern world while Nike React technology adds exceptional underfoot comfort.
+            - Shown: White/University Red/Black
+            - Style: CD4366-100
+          price: 120.0
+          currency: usd
+          thumb_image: https://static.nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/i1-fe0b0aa8-5a11-4839-b1ae-28358239e214/air-force-1-react-mens-shoe-b7HKxL.jpg
+          large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-e17d75fb-c3e5-4ed4-8a18-16eeac824d73/air-force-1-react-mens-shoe-b7HKxL.jpg
+        - id: CK5692-600
+          name: Air Jordan 3 Retro SE
+          description: |
+            One of the most recognizable shoes in the AJ collection, the Air Jordan 3 Retro features lightweight, visible cushioning just like the original from '88. Signature details and materials celebrate the game-changing icon.
+            - Shown: Fire Red/Cement Grey/Black/Fire Red
+            - Style: CK5692-600
+          price: 200.0
+          currency: usd
+          thumb_image: https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i1-8334fb00-7956-46b7-b74e-ae0d87915a74/air-jordan-3-retro-se-mens-shoe-jzW36H.jpg
+          large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-da46a9c8-89d0-4d80-81a2-6a3a6db55128/air-jordan-3-retro-se-mens-shoe-jzW36H.jpg
+        - id: CD3003-102
+          name: Jordan "Why Not?" Zer0.3
+          description: |
+            One of the game's fiercest competitors, triple-double dynamo Russell Westbrook has the motor, muscle and mentality to match his fearlessness—with the stats to back it up. The Jordan "Why Not?" Zer0.3 is tuned for Russ' on-court chaos, featuring a midfoot strap for lock-in and a large cushioning unit to help drive him hard and fast toward the basket.
+            - Shown: White/Racer Pink/Ghost Green/Black
+            - Style: CD3003-102
+          price: 130.0
+          currency: usd
+          thumb_image: https://images.nike.com/is/image/DotCom/CD3003_102?$NIKE_PWP_GRAY$&wid=420&hei=420
+          large_image: https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-51432200-ccc1-4394-8974-f437622bbfbb/jordan-why-not-zer03-mens-basketball-shoe-LJCLGj.jpg
+    CartObject:
+      value:
+        products: 
+          - id: CD4366-100
+            name: Nike Air Force 1 React
+            description: |
+              Refresh your look and step into a new AF1 world with the Nike Air Force 1 React. It fuses modern design with iconic b-ball style for a big, bold look. The oversized Swoosh, large "AIR" on the midsole and new sole pattern let you express your modern world while Nike React technology adds exceptional underfoot comfort.
+              - Shown: White/University Red/Black
+              - Style: CD4366-100
+            price: 120.0
+            currency: usd
+            thumb_image: https://static.nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/i1-fe0b0aa8-5a11-4839-b1ae-28358239e214/air-force-1-react-mens-shoe-b7HKxL.jpg
+            large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-e17d75fb-c3e5-4ed4-8a18-16eeac824d73/air-force-1-react-mens-shoe-b7HKxL.jpg
+        total: 450.0
+        shipping: 0.0
+        tax: 0.0
+    CheckoutObject:
+      value:
+        isSuccessful: true
+    BadRequestErrorObject:
+      value:
+        - code: bad_request
+          message: Missed inputs or invalid format
