@@ -8,10 +8,28 @@ Test open API online [Swagger Link](https://app.swaggerhub.com/apis/nuxzero/samp
 
 ## Local
 
-Run open API on your local [apisprout](https://github.com/danielgtaylor/apisprout)
+This project used [apisprout](https://github.com/danielgtaylor/apisprout) to run Open API in local.
 
-**Sample command:**
+**Install GO** 
+```
+brew install go
+```
 
+**Set GOPATH**
 ```
-apisprout --validate-server sample-store.yml
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
 ```
+
+**Install Apisprout** \
+```
+go get github.com/danielgtaylor/apisprout
+```
+
+## Usage
+
+`apisprout --validate-server sample-store.yml`
+
+Now you can test API from this URL
+
+`http://localhost:8000/nuxzero/sample-store/1.0.0/[API_PATH]`

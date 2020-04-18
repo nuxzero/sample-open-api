@@ -232,10 +232,13 @@ components:
     Cart:
       type: object
       properties:
-        products:
+        items:
           type: array
           items: 
-            $ref: '#/components/schemas/Product'
+            $ref: '#/components/schemas/CartItem'
+        subtotal:
+          type: number
+          format: double
         total:
           type: number
           format: double
@@ -244,6 +247,13 @@ components:
           format: double
       example:
           $ref: '#/components/examples/CartObject'
+    CartItem: 
+      type: object
+      properties:
+        product: 
+          type: object
+        quantity:
+          type: integer
     CartRequest:
       type: object
       properties:
@@ -338,20 +348,35 @@ components:
           large_image: https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-51432200-ccc1-4394-8974-f437622bbfbb/jordan-why-not-zer03-mens-basketball-shoe-LJCLGj.jpg
     CartObject:
       value:
-        products: 
-          - id: CD4366-100
-            name: Nike Air Force 1 React
-            description: |
-              Refresh your look and step into a new AF1 world with the Nike Air Force 1 React. It fuses modern design with iconic b-ball style for a big, bold look. The oversized Swoosh, large "AIR" on the midsole and new sole pattern let you express your modern world while Nike React technology adds exceptional underfoot comfort.
-              - Shown: White/University Red/Black
-              - Style: CD4366-100
-            price: 120.0
-            currency: usd
-            thumb_image: https://static.nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/i1-fe0b0aa8-5a11-4839-b1ae-28358239e214/air-force-1-react-mens-shoe-b7HKxL.jpg
-            large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-e17d75fb-c3e5-4ed4-8a18-16eeac824d73/air-force-1-react-mens-shoe-b7HKxL.jpg
-        total: 450.0
-        shipping: 0.0
-        tax: 0.0
+        items: 
+          - product:
+              id: CD4366-100
+              name: Nike Air Force 1 React
+              description: |
+                Refresh your look and step into a new AF1 world with the Nike Air Force 1 React. It fuses modern design with iconic b-ball style for a big, bold look. The oversized Swoosh, large "AIR" on the midsole and new sole pattern let you express your modern world while Nike React technology adds exceptional underfoot comfort.
+                - Shown: White/University Red/Black
+                - Style: CD4366-100
+              price: 120.0
+              currency: usd
+              thumb_image: https://static.nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/i1-fe0b0aa8-5a11-4839-b1ae-28358239e214/air-force-1-react-mens-shoe-b7HKxL.jpg
+              large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-e17d75fb-c3e5-4ed4-8a18-16eeac824d73/air-force-1-react-mens-shoe-b7HKxL.jpg
+            quantity: 1
+          - product:
+              id: CD3003-102
+              name: Jordan "Why Not?" Zer0.3
+              description: |
+                One of the game's fiercest competitors, triple-double dynamo Russell Westbrook has the motor, muscle and mentality to match his fearlessness—with the stats to back it up. The Jordan "Why Not?" Zer0.3 is tuned for Russ' on-court chaos, featuring a midfoot strap for lock-in and a large cushioning unit to help drive him hard and fast toward the basket.
+                - Shown: White/Racer Pink/Ghost Green/Black
+                - Style: CD3003-102
+              price: 130.0
+              currency: usd
+              thumb_image: https://images.nike.com/is/image/DotCom/CD3003_102?$NIKE_PWP_GRAY$&wid=420&hei=420
+              large_image: https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-51432200-ccc1-4394-8974-f437622bbfbb/jordan-why-not-zer03-mens-basketball-shoe-LJCLGj.jpg
+            quantity: 1
+        subtotal: 250.0
+        total: 300.0
+        shipping: 35.0
+        tax: 15.0
     CheckoutObject:
       value:
         isSuccessful: true
