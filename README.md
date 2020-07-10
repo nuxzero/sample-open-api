@@ -28,8 +28,12 @@ go get github.com/danielgtaylor/apisprout
 
 ## Usage
 
-`apisprout --validate-server sample-store.yml`
+`apisprout --validate-server --watch sample-store.yml`
 
 Now you can test API from this URL
 
 `http://localhost:8000/nuxzero/sample-store/1.0.0/[API_PATH]`
+
+## References
+- [Swagger](https://swagger.io/docs/specification/about/)
+- [API Sprout](https://github.com/danielgtaylor/apisprout)

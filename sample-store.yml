@@ -221,6 +221,11 @@ components:
         large_image: 
           type: string
           description: Product image URLe
+        gallery: 
+          type: array
+          items:
+            type: string
+          description: Image gallery of the specific product
       example: 
         $ref: '#/components/examples/ProductObject'
     ProductList:
@@ -308,18 +313,65 @@ components:
         profile_image: https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/f0/f027cd92a7197258be82a4bb53b83f2d0cf8812e.jpg
     ProductObject:
       value:
-        id: CD4366-100
-        name: Nike Air Force 1 React
+        id: CD3003-105
+        name: Air Jordan 1 Mid
         description: |
-          Refresh your look and step into a new AF1 world with the Nike Air Force 1 React. It fuses modern design with iconic b-ball style for a big, bold look. The oversized Swoosh, large "AIR" on the midsole and new sole pattern let you express your modern world while Nike React technology adds exceptional underfoot comfort.
-          - Shown: White/University Red/Black
-          - Style: CD4366-100
-        price: 120.0
+          The Air Jordan 1 Mid Shoe is inspired by the first AJ1, offering OG fans a look at how far the Jordan brand has come since 1985.
+          - Shown: Black/White/Noble Red
+          - Style: 554724-066
+
+          ICONIC LOOK, EVERYDAY COMFORT.
+          The Air Jordan 1 Mid Shoe is inspired by the first AJ1, offering OG fans a look at how far the Jordan brand has come since 1985.
+
+          Benefits
+          - An Air-Sole unit provides lightweight cushioning.
+          - Real and synthetic leather in the upper offers lightweight durability.
+          - A solid rubber outsole enhances traction on a variety of surfaces.
+        price: 115
         currency: usd
-        thumb_image: https://static.nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/i1-fe0b0aa8-5a11-4839-b1ae-28358239e214/air-force-1-react-mens-shoe-b7HKxL.jpg
-        large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-e17d75fb-c3e5-4ed4-8a18-16eeac824d73/air-force-1-react-mens-shoe-b7HKxL.jpg
+        thumb_image: https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/z3afmglwa3q93wjt3ksh/air-jordan-1-mid-shoe-1zMCFJ.jpg
+        large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/qb2ry1p1iv2vqrdfq4oa/air-jordan-1-mid-shoe-1zMCFJ.jpg
+        gallery:
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/qb2ry1p1iv2vqrdfq4oa/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/lzxq5rdm7khmc6jgnb3r/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/qzpl1ftoys2xjxz1kqyx/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/wkymin4cmr1l9xruyyqk/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/xlnxhgl2v7fbtbnk7nev/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/m5okzi1kzvuqadwotdrd/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-06cb1f86-d883-459d-8732-67381980b352/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          - https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/i1-0acc8b71-221e-4991-8c4e-f58978cde9f1/air-jordan-1-mid-shoe-1zMCFJ.jpg
     ProductListObject:
       value:
+        - id: CD3003-105
+          name: Air Jordan 1 Mid
+          description: |
+            The Air Jordan 1 Mid Shoe is inspired by the first AJ1, offering OG fans a look at how far the Jordan brand has come since 1985.
+            - Shown: Black/White/Noble Red
+            - Style: 554724-066
+          price: 115
+          currency: usd
+          thumb_image: https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/z3afmglwa3q93wjt3ksh/air-jordan-1-mid-shoe-1zMCFJ.jpg
+          large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/qb2ry1p1iv2vqrdfq4oa/air-jordan-1-mid-shoe-1zMCFJ.jpg
+        - id: CD3003-103
+          name: Nike Air Force 1 '07
+          description: |
+            Hoops in the park, Sunday BBQs and sunshine. The radiance lives on in the Nike Air Force 1 ’07, the b-ball OG that puts a fresh spin on what you know best: crisp leather, stitched overlays in classic all-white and the perfect amount of flash to make you shine.
+            - Shown: White/White
+            - Style: 315122-111
+          price: 90.0
+          currency: usd
+          thumb_image: https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/jomszuqr8gw3h18xhpro/air-force-1-07-mens-shoe-JkTGzADv.jpg
+          large_image: https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/gsuin11ptg5qgktmzoat/air-force-1-07-mens-shoe-JkTGzADv.jpg
+        - id: CD3003-104
+          name: Nike Cortez Basic
+          description: |
+            The Nike Cortez Basic is inspired by the 1972 original. Although it has gone through many incarnations, this version features leather in the upper for a return to the style icon's roots.
+            - Shown: White/Varsity Royal/Varsity Red
+            - Style: 819719-103
+          price: 59.97
+          currency: usd
+          thumb_image: https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/x55aeh2ax0ampnzqj64x/cortez-basic-shoe-345sdw.jpg
+          large_image: https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/hjiors7jvxoqipamz6z9/cortez-basic-shoe-345sdw.jpg
         - id: CD4366-100
           name: Nike Air Force 1 React
           description: |
