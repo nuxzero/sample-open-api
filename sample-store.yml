@@ -279,6 +279,14 @@ components:
           type: boolean
           description: Payment status 
           example: true
+        authorize_uri:
+          type: string
+          description: URI for payment authorization
+          example: https://api.omise.co/payments/paym_test_no1t4tnemucod0e51mo/authorize
+        return_uri:
+          type: string
+          description: URI to which customer is redirected after 3-D Secure card authorization
+          example: https://www.example.com/orders/54321/complete
     CheckoutRequest:
       type: object
       properties:
@@ -439,6 +447,8 @@ components:
     CheckoutObject:
       value:
         isSuccessful: true
+        authorize_uri: https://api.omise.co/payments/paym_test_5jqp4to1aao3t7no1ro/authorize
+        return_uri: https://localhost:8080/completion
     BadRequestErrorObject:
       value:
         - code: bad_request
